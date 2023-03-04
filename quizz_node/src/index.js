@@ -8,7 +8,7 @@ import cors from "cors"
 const app = express()
 app.use(
   cors({
-    origin: process.env.WEB_APP_ORIGIN,
+    origin: "*",
   })
 )
 app.use(express.json())
