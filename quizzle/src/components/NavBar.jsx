@@ -86,11 +86,9 @@ const NavBar = (props) => {
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
-                  as="a"
-                  href={item.href}
                   className="text-neutral-800 font-montserrat hover:bg-zinc-100 block rounded-md px-3 py-2 font-bold"
                 >
-                  {item.name}
+                  <Link href={item.href}>{item.name}</Link>
                 </Disclosure.Button>
               ))}
             </div>

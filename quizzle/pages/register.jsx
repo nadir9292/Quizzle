@@ -50,7 +50,7 @@ const Register = () => {
     <div className="bg-mobile bg-cover md:bg-normal md:bg-cover h-screen">
       <NavBar jwt={jwt} logout={logout} />
       <div className="flex justify-center mt-20">
-        <div className="bg-zinc-100 shadow w-2/3 md:w-1/2 lg:w-1/3 h-2/3 md:h-96 p-5">
+        <div className="bg-zinc-100 shadow w-4/5 md:w-2/3 lg:w-1/3  md:h-96 p-9">
           <Formik
             onSubmit={handleFormSubmit}
             initialValues={initialValues}
@@ -69,7 +69,7 @@ const Register = () => {
                   />
                 )}
                 <Text variant="login_register" size="xl">
-                  Welcome
+                  WELCOME
                 </Text>
                 <FormField name="pseudo" type="text" placeholder=" ">
                   Pseudo

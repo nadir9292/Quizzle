@@ -29,14 +29,14 @@ const Home = () => {
       />
       <div className="flex justify-center mt-10">
         <motion.ul
-          className="grid justify-items-center w-2/3"
+          className="grid grid-cols-1 gap-4 place-content-center w-2/3"
           initial="hidden"
           animate="visible"
           variants={list}
         >
           <motion.li variants={item}>
             <Text variant="card_title" size="xxl">
-              Welcom
+              Welcome {user ? <h1>{JSON.parse(user).pseudo}</h1> : null}
             </Text>
           </motion.li>
           <motion.li variants={item}>
