@@ -7,6 +7,15 @@ const questionRoute = ({ app }) => {
     res.send(questions)
   })
 
+  //Random Classic
+  app.get("/classic", async (req, res) => {
+    const questionIds = await QuestionModel.query()
+      .limit(5)
+      .orderByRaw("RANDOM ()")
+
+    res.send(questionIds)
+  })
+
   //POST request
   app.post("/insertQuestion", async (req, res) => {
     const {

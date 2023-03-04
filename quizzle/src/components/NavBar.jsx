@@ -1,38 +1,30 @@
 import { Disclosure, Menu } from "@headlessui/react"
-import {
-  ArrowLeftOnRectangleIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
 import Button from "./Button"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Game", href: "#", current: false },
+  { name: "Home", href: "/" },
+  { name: "Classic mode", href: "/classic-mode" },
 ]
 
-const classNames = (...classes) => {
-  return classes.filter(Boolean).join(" ")
-}
-
 const NavBar = (props) => {
-  const { jwt, logout } = props
+  const { jwt, logout, pseudo } = props
   const [isLoggedIn, setIsLoggedIn] = useState(jwt)
   useEffect(() => {
     setIsLoggedIn(jwt)
   }, [jwt])
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
+            <div className="relative flex h-20 items-center justify-end">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-zinc-100 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -41,32 +33,14 @@ const NavBar = (props) => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
+              <div className="flex flex-1items-center justify-center sm:items-stretch sm:justify-end">
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 bg-zinc-100 px-10 py-2 rounded-xl">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
+                        className="text-neutral-800 font-montserrat rounded-md px-3 py-2 text-lg font-bold hover:scale-110"
                       >
                         {item.name}
                       </a>
@@ -74,47 +48,47 @@ const NavBar = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  {isLoggedIn ? (
-                    <div>
-                      <Button variant="secondary" size="lg" onClick={logout}>
-                        <ArrowLeftOnRectangleIcon className="h-6 w-6 text-blue-500" />
+              {/* Profile dropdown */}
+              <Menu as="div" className="relative ml-5 ">
+                {isLoggedIn ? (
+                  <div>
+                    {pseudo && (
+                      <Link
+                        className="font-montserrat text-lg md:text-2xl text-zinc-100 md:text-neutral-800 px-4 py-4 rounded-xl hover:scale-110"
+                        href="/account"
+                      >
+                        {pseudo}
+                      </Link>
+                    )}
+                    <Button variant="secondary" size="lg" onClick={logout}>
+                      ❌
+                    </Button>
+                  </div>
+                ) : (
+                  <div>
+                    <Link href="/login">
+                      <Button variant="navBar" size="lg">
+                        LOGIN
                       </Button>
-                    </div>
-                  ) : (
-                    <div>
-                      <Link href="/login">
-                        <Button variant="secondary" size="lg">
-                          LOGIN
-                        </Button>
-                      </Link>
-                      <Link href="/register">
-                        <Button variant="secondary" size="lg">
-                          REGISTER
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </Menu>
-              </div>
+                    </Link>
+                    <Link href="/register">
+                      <Button variant="navBar" size="lg">
+                        REGISTER
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </Menu>
             </div>
           </div>
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
+            <div className="space-y-1 px-2 pt-2 pb-3 bg-yellow-400 rounded-b-lg">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
+                  className="text-neutral-800 font-montserrat hover:bg-zinc-100 block rounded-md px-3 py-2 font-bold"
                 >
                   {item.name}
                 </Disclosure.Button>

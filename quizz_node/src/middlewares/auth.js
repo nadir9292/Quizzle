@@ -5,7 +5,6 @@ const auth = (req, res, next) => {
   const {
     headers: { authentification: jwt },
   } = req
-
   try {
     const { payload } = jsonwebtoken.verify(jwt, config.security.session.secret)
 

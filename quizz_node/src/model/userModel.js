@@ -13,6 +13,10 @@ class UserModel extends Model {
   static findUserByPseudo(pseudo) {
     return UserModel.query().findOne({ pseudo })
   }
+
+  static findUserById(id) {
+    return UserModel.query().findOne({ id })
+  }
 }
 
 export default UserModel

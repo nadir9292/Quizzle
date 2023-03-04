@@ -27,13 +27,9 @@ const validationSchema = yup.object().shape({
 const Login = () => {
   const router = useRouter()
   const [error, setError] = useState("")
-  const { jwt, logout, saveJwt } = useContext(AppContext)
+  const { jwt, logout, saveJwt, saveUser } = useContext(AppContext)
   const goToHomePage = () => {
     router.push("/")
-    // attendre une petite seconde pour que la redirection soit effective
-    setTimeout(() => {
-      window.location.reload()
-    }, 100)
   }
   const handleFormSubmit = useCallback(async ({ pseudo, password }) => {
     try {
@@ -60,45 +56,49 @@ const Login = () => {
   }, [])
 
   return (
-    <>
+    <div className="bg-mobile bg-cover md:bg-normal md:bg-cover h-screen">
       <NavBar jwt={jwt} logout={logout} />
-      <div className="max-w-2xl  mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-4xl lg:px-8">
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-        >
-          {({ isSubmitting, isValid, handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              {error && <Popup msg={error} btnMsg="Retry" color="bg-red-400" />}
-              <Text variant="login_register" size="xl">
-                Welcome
-              </Text>
-              <FormField name="pseudo" type="text" placeholder=" ">
-                Pseudo
-              </FormField>
-              <FormField name="password" type="password" placeholder=" ">
-                Password
-              </FormField>
-              <Button
-                type="submit"
-                disabled={isSubmitting || !isValid}
-                variant="btnValidation"
-                size="lg"
-              >
-                Sign Up
-              </Button>
-              <Text variant="info" sizes="sm">
-                Don't have an account ?&nbsp;
-                <Link href="/register">
-                  <Text variant="link">Sign Up</Text>
-                </Link>
-              </Text>
-            </form>
-          )}
-        </Formik>
+      <div className="flex justify-center mt-20">
+        <div className="bg-zinc-100 shadow w-2/3 md:w-1/2 lg:w-1/3 h-2/3 md:h-96 p-5">
+          <Formik
+            onSubmit={handleFormSubmit}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+          >
+            {({ isSubmitting, isValid, handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                {error && (
+                  <Popup msg={error} btnMsg="Retry" color="bg-red-400" />
+                )}
+                <Text variant="login_register" size="xl">
+                  LOGIN
+                </Text>
+                <FormField name="pseudo" type="text" placeholder=" ">
+                  Pseudo
+                </FormField>
+                <FormField name="password" type="password" placeholder=" ">
+                  Password
+                </FormField>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting || !isValid}
+                  variant="btnValidation"
+                  size="lg"
+                >
+                  Sign In
+                </Button>
+                <Text variant="info" sizes="sm">
+                  Don't have an account ?&nbsp;
+                  <Link href="/register">
+                    <Text variant="link">Sign Up</Text>
+                  </Link>
+                </Text>
+              </form>
+            )}
+          </Formik>
+        </div>
       </div>
-    </>
+    </div>
   )
 }
 
