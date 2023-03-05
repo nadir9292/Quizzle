@@ -3,13 +3,8 @@ import "dotenv/config"
 export default {
   db: {
     client: process.env.DB_CLIENT,
-    connection: {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-    },
+    connection:
+      "postgres://cwbkyroo:KvTHRti5eLb_UY0-3TqaSxzq4-cHbmam@mouse.db.elephantsql.com/cwbkyroo",
   },
   security: {
     session: {
