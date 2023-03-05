@@ -107,8 +107,8 @@ const Classic = () => {
               variants={scoreVariant}
             >
               <div>
-                <span className="font-montserrat bg-zinc-100 text-neutral-800 mr-5 px-1 py-7 border border-4 border-yellow-400 rounded-full">
-                  Score : {score}
+                <span className="font-montserrat text-neutral-800 mr-5 p-5 text-2xl font-bold text-yellow-400 md:text-5xl md:text-neutral-800">
+                  {score}
                 </span>
               </div>
             </motion.div>
