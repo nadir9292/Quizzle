@@ -2,7 +2,7 @@ import express from "express"
 import knexfile from "../knexfile.js"
 import { Model } from "objection"
 import knex from "knex"
-import allRoutes from "./routes/allRoutes.js"
+import allRoutes from "../src/routes/allRoutes.js"
 import cors from "cors"
 
 const app = express()
