@@ -1,15 +1,8 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "./srcindex.js",
-      "use": "@now/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "./src/index.js"
-    }
-  ]
+  "build": {
+    "env": {
+      "MY_ENV_VAR": "my-value"
+    },
+    "command": "npm start ./src/index.js"
+  }
 }
