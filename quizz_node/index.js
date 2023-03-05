@@ -1,8 +1,8 @@
 import express from "express"
-import knexfile from "../knexfile.js"
+import knexfile from "./knexfile.js"
 import { Model } from "objection"
 import knex from "knex"
-import allRoutes from "../src/routes/allRoutes.js"
+import allRoutes from "./src/routes/allRoutes.js"
 import cors from "cors"
 
 const app = express()
@@ -20,5 +20,5 @@ const port = 3000
 allRoutes({ app, db })
 
 app.listen(port, () => {
-  console.log("App listening on port" + port)
+  console.log("App listening on port : " + port + " at " + new Date())
 })
