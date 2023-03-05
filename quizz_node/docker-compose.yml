@@ -1,19 +1,28 @@
 version: "3"
+
 services:
   app:
     build: .
     ports:
       - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_DATABASE}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
       - db
-    restart: on-failure
+    restart: always
+
   db:
-    image: postgres
+    image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: quizz
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
     ports:
       - "5432:5432"
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Ajoute un script SQL pour initialiser la base de données
+    restart: always
