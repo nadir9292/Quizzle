@@ -2,13 +2,13 @@ import "dotenv/config"
 
 export default {
   db: {
-    client: process.env.DB_CLIENT,
+    client: "host",
     connection:
-      "postgres://cwbkyroo:KvTHRti5eLb_UY0-3TqaSxzq4-cHbmam@mouse.db.elephantsql.com/cwbkyroo",
+      "postgres://bkevbxyr:oN_u19K6MwTRBXk4ah8vgY2z99rDb0Di@trumpet.db.elephantsql.com/bkevbxyr",
   },
   security: {
     session: {
-      secret: process.env.SECURITY_SECRET,
+      secret: "totitoti",
       expiresIn: "2 days",
     },
   },
