@@ -5,7 +5,7 @@ export const makeClient = (options = {}) =>
   axios.create(
     deepmerge(
       {
-        baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+        baseURL: "https://quizzle-api.vercel.app",
       },
       options
     )
