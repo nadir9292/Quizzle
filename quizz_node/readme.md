@@ -1,11 +1,12 @@
-## CMD KNEX
+## DEV
 
-- **Create a migration :** `npx knex migrate:make "nameExemple"`
+- **init node_module :** `npm install`
 - **Run a migration :** `npx knex migrate:latest`
 - **Rollback the migration :** `npx knex migrate:rollback`
 
-## Step for docker : 
+## Step for docker :
+
 ```
- - docker build -t quizzle .
- - docker-compose -d up
+ - docker-compose up -d
+ - docker-compose run app npx knex migrate:latest
 ```
