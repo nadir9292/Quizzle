@@ -2,13 +2,17 @@ import "dotenv/config"
 
 export default {
   db: {
-    client: "postgres",
-    connection:
-      "postgres://bkevbxyr:oN_u19K6MwTRBXk4ah8vgY2z99rDb0Di@trumpet.db.elephantsql.com/bkevbxyr",
+    client: "pg",
+    connection: {
+      host: "postgres",
+      user: "postgres",
+      password: "postgres",
+      database: "quizz",
+    },
   },
   security: {
     session: {
-      secret: "totitoti",
+      secret: "dockersecret",
       expiresIn: "2 days",
     },
   },
