@@ -11,4 +11,4 @@
  - docker-compose run app npx knex migrate:latest
 ```
 
-LINK API : `quizzle-api.azurewebsites.net` from conainer docker (registry container)
+LINK API : `api-quizzle.azurewebsites.net` from container docker (registry container)
