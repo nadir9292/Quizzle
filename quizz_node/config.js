@@ -4,10 +4,12 @@ export default {
   db: {
     client: "pg",
     connection: {
-      host: "postgres",
+      host: "quizzledb.postgres.database.azure.com",
       user: "postgres",
-      password: "postgres",
-      database: "quizz",
+      password: "RsdTXRZKADp97GQo",
+      database: "quizzledb",
+      port: 5432,
+      ssl: true,
     },
   },
   security: {
