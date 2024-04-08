@@ -1,9 +1,16 @@
-import { Button, Input, Typography } from "@material-tailwind/react"
+import {
+  Button,
+  Input,
+  Typography,
+  Select,
+  Option,
+} from "@material-tailwind/react"
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-const CreateQuestionClassic = () => {
+const CreateQuestionClassic = (props) => {
   const [error, setError] = useState("")
+  const { levels, domains } = props
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
@@ -27,7 +34,7 @@ const CreateQuestionClassic = () => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className="mb-1 flex flex-col gap-6 w-80">
+      <div className="mb-1 flex flex-col gap-6 w-80 md:w-96 overflow-y-auto h-96 md:h-full h-[650px]">
         <Typography variant="lead" color="white">
           Question
         </Typography>
@@ -84,6 +91,34 @@ const CreateQuestionClassic = () => {
             className: "before:content-none after:content-none",
           }}
         />
+        <Typography variant="lead" color="white">
+          Theme
+        </Typography>
+        <select
+          name="domains"
+          autoComplete="Theme"
+          className="block w-full p-3 rounded-lg"
+        >
+          {Array.isArray(domains.data) && domains.data.length > 0 ? (
+            domains.data.map((item, index) => <option>{item.name}</option>)
+          ) : (
+            <option></option>
+          )}
+        </select>
+        <Typography variant="lead" color="white">
+          Difficulty
+        </Typography>
+        <select
+          name="level"
+          autoComplete="Difficulty"
+          className="block w-full p-3 rounded-lg"
+        >
+          {Array.isArray(levels.data) && levels.data.length > 0 ? (
+            levels.data.map((item, index) => <option>{item.name}</option>)
+          ) : (
+            <option></option>
+          )}
+        </select>
         <Button
           type="submit"
           fullWidth

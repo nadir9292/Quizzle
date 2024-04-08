@@ -4,13 +4,14 @@ import { AppContext } from "../src/components/AppContext"
 import { Card, Input, Button, Typography } from "@material-tailwind/react"
 import Popup from "../src/components/Popup"
 import axios from "axios"
-import { Router } from "next/router"
+import { useRouter } from "next/router"
 import ParticlesComponent from "../src/components/ParticlesComponent"
 
 const Login = () => {
+  const router = useRouter()
   const [error, setError] = useState("")
   const [openPopup, setOpenPopup] = useState(false)
-  const { jwt, logout, saveJwt, user, saveUser, isError, changeIsError } =
+  const { jwt, logout, saveJwt, user, saveUser, isError, changeIsError, role } =
     useContext(AppContext)
   const handleOpen = () => {
     changeIsError()
@@ -33,8 +34,8 @@ const Login = () => {
         ) {
           console.log(response.data)
           saveJwt(response.data.access_token, response.data.id)
-          saveUser(response.data.name)
-          setTimeout(() => Router.push("/"), 1000)
+          saveUser(response.data)
+          setTimeout(() => router.push("/"), 1000)
         } else {
           setError("Error JWT")
         }
@@ -46,15 +47,30 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className="h-screen md:bg-normal bg-mobile">
       <ParticlesComponent isError={isError} />
-      <NavBar jwt={jwt} logout={logout} pseudo={user ? user : ""} />
-      <div className="flex justify-center mt-20">
-        <Card className="bg-white px-4 py-2 md:px-12 md:py-4" shadow={false}>
-          <Typography variant="h4" color="blue-gray" className="text-center">
-            Login
+      <NavBar
+        jwt={jwt}
+        logout={logout}
+        pseudo={user ? user : ""}
+        role={role ? role : 2}
+      />
+      <div className="flex justify-center -mt-2 md:mt-24">
+        <Card
+          className="bg-transparent px-4 py-2 md:px-12 md:py-4"
+          shadow={false}
+        >
+          <Typography
+            variant="h4"
+            color="white"
+            className="text-center font-passion text-45xl -mb-8"
+          >
+            LOGIN
           </Typography>
-          <Typography color="gray" className="mt-1 font-normal text-center">
+          <Typography
+            color="white"
+            className="mt-1 font-normal font-dancing text-2xl text-center"
+          >
             Nice to meet you! Enter your details to login.
           </Typography>
           <form
@@ -62,7 +78,11 @@ const Login = () => {
             className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
           >
             <div className="mb-1 flex flex-col gap-6">
-              <Typography variant="h6" color="blue-gray" className="-mb-3">
+              <Typography
+                variant="h6"
+                color="white"
+                className="-mb-3 font-montserrat font-bold"
+              >
                 Your Email
               </Typography>
               <Input
@@ -74,7 +94,11 @@ const Login = () => {
                   className: "before:content-none after:content-none",
                 }}
               />
-              <Typography variant="h6" color="blue-gray" className="-mb-3">
+              <Typography
+                variant="h6"
+                color="white"
+                className="-mb-3 font-montserrat font-bold"
+              >
                 Password
               </Typography>
               <Input
@@ -91,7 +115,7 @@ const Login = () => {
             <Button className="mt-6 bg-yellow-400" type="submit" fullWidth>
               Login
             </Button>
-            <Typography color="gray" className="mt-4 text-center font-normal">
+            <Typography color="white" className="mt-4 text-center font-normal">
               You don't have a account ?{" "}
               <a href="/register" className="font-medium text-blue-400">
                 Sign up here
